@@ -422,12 +422,14 @@ $(CURL_VERSION)/.chrome: $(chrome_libs)	$(CURL_VERSION).tar.xz $(CURL_VERSION)/.
 		config_flags="$$config_flags --with-ca-path=$(with_ca_path)"; \
 	  fi; \
 	  add_libs="-pthread"; \
+	  add_cppflags="-I$(boringssl_install_dir)/include" \
+	  add_ldflags="-L$(boringssl_install_dir)/lib" \
 	  add_cflags="-I$(boringssl_install_dir)"; \
 	}
 
 	echo "Configuring curl with: $$config_flags"
 
-	./configure $$config_flags CFLAGS="$$add_cflags" LIBS="$$add_libs"
+	./configure $$config_flags CFLAGS="$$add_cflags" CPPFLAGS="$$add_cppflags" LDFLAGS="$$add_ldflags" LIBS="$$add_libs"
 
 	# Remove possible leftovers from a previous compilation
 	$(MAKE) clean MAKEFLAGS=
