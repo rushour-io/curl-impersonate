@@ -178,6 +178,7 @@ $(brotli_static_libs): brotli-$(BROTLI_VERSION).tar.gz
 	cd brotli-$(BROTLI_VERSION)
 	mkdir -p out
 	cd out
+	pwd
 
 	# Convert autoconf style os name to CMake style os name.
 	case $(host_os) in           \
